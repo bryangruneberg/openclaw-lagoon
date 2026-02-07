@@ -1,0 +1,18 @@
+# Environment variables are loaded from .env.local (git-ignored, not in Docker images).
+# Copy .env.local.example to .env.local and set your values.
+
+services:
+  openclaw-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: "1111111"
+    env_file:
+      - .env
+    volumes:
+      - ./.local:/home/.openclaw
+    ports:
+      - "3001:3000"
+    labels:
+      lagoon.type: node-persistent
+      lagoon.persistent: /home/.openclaw
