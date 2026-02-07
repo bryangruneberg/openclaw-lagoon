@@ -42,12 +42,9 @@ RUN apk add --no-cache openssh-client $EXTRA_APK_PACKAGES
 COPY .lagoon/05-ssh-key.sh /lagoon/entrypoints/05-ssh-key.sh
 COPY .lagoon/50-shell-config.sh /lagoon/entrypoints/50-shell-config.sh
 COPY .lagoon/60-amazeeai-config.sh /lagoon/entrypoints/60-amazeeai-config.sh
-
-ARG LAGOON_SSH_PRIVATE_KEY
-
 COPY .lagoon/ssh_config /etc/ssh/ssh_config
-# Copy the generated SSH key by Lagoon into the container
-RUN /lagoon/entrypoints/05-ssh-key.sh
+
+
 
 # Create data directories for persistent config and npm global packages
 RUN mkdir -p /home/.openclaw /home/.openclaw/npm \
@@ -65,6 +62,11 @@ ENV NODE_ENV=production \
     LAGOON=openclaw
 
 WORKDIR /home/.openclaw
+
+USER 10000
+ARG LAGOON_SSH_PRIVATE_KEY
+# Copy the generated SSH key by Lagoon into the container
+RUN /lagoon/entrypoints/05-ssh-key.sh
 
 # Port 3000 already exposed by base image
 CMD ["openclaw", "gateway", "--bind", "lan"]
