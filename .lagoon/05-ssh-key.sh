@@ -23,3 +23,4 @@ fi
 
 if command -v fix-permissions >/dev/null 2>&1; then
   fix-permissions /home/.ssh
+fi
