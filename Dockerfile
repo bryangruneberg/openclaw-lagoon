@@ -38,10 +38,15 @@ RUN if [ -n "$EXTRA_APK_PACKAGES" ]; then \
     fi
 
 # Copy Lagoon entrypoint scripts
+# 05-ssh-key.sh: Automated SSH key setup for container (handles Lagoon and custom environments)
 # 50-shell-config.sh: Custom bash prompt with lobster branding
 # 60-amazeeai-config.sh: Model discovery from amazee.ai
+COPY .lagoon/05-ssh-key.sh /lagoon/entrypoints/05-ssh-key.sh
 COPY .lagoon/50-shell-config.sh /lagoon/entrypoints/50-shell-config.sh
 COPY .lagoon/60-amazeeai-config.sh /lagoon/entrypoints/60-amazeeai-config.sh
+
+# Copy the generated SSH key by Lagoon into the container
+RUN /lagoon/entrypoints/05-ssh-key.sh
 
 # Create data directories for persistent config and npm global packages
 RUN mkdir -p /home/.openclaw /home/.openclaw/npm \
