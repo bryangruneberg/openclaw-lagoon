@@ -15,9 +15,6 @@ RUN openclaw --version
 # Stage 2: Runtime image (smaller, no build tools)
 FROM uselagoon/node-22:latest
 
-# Install git (needed at runtime for some skills)
-RUN apk add --no-cache git bash curl
-
 # Install pnpm globally (needed by some openclaw skills)
 RUN npm install -g pnpm
 
@@ -30,7 +27,7 @@ RUN openclaw --version
 
 # Optional: extra Alpine packages for browser automation or other needs
 ARG EXTRA_APK_PACKAGES=""
-RUN apk add --no-cache openssh-client python3 jq $EXTRA_APK_PACKAGES
+RUN apk add --no-cache git bash curl openjdk21-jre-headless openssh-client python3 jq $EXTRA_APK_PACKAGES
 
 # Copy Lagoon entrypoint scripts
 # 05-ssh-key.sh: Automated SSH key setup for container (handles Lagoon and custom environments)
