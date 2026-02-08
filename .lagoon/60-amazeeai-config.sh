@@ -268,3 +268,6 @@ main().catch(err => {
   process.exit(1);
 });
 EOFNODE
+
+echo "[amazeeai-config] Configuration complete. Starting OpenClaw gateway..."
+echo "[amazeeai-config] Note: OpenClaw may take a moment to initialize (no output is normal)."
