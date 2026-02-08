@@ -27,7 +27,7 @@ RUN openclaw --version
 
 # Optional: extra Alpine packages for browser automation or other needs
 ARG EXTRA_APK_PACKAGES=""
-RUN apk add --no-cache git bash curl openjdk21-jre-headless openssh-client python3 jq $EXTRA_APK_PACKAGES
+RUN apk add --no-cache git bash curl openjdk21-jre-headless gcompat openssh-client python3 jq $EXTRA_APK_PACKAGES
 
 # Copy Lagoon entrypoint scripts
 # 05-ssh-key.sh: Automated SSH key setup for container (handles Lagoon and custom environments)
