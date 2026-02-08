@@ -17,11 +17,13 @@ fi
 if [ -f /home/.ssh/key ] && [ -w /home/.ssh/key ]; then
   # add a new line to the key. OpenSSH is very picky that keys are always end with a newline
   echo >> /home/.ssh/key
+
+  # Check the current file permissions of /home/.ssh/key.
+  # If the permissions are not set to 600 (owner read/write only), update them to 600
+  # to ensure SSH private key security (required by OpenSSH).
+  if [ "$(stat -c '%a' /home/.ssh/key)" != "600" ]; then
+  chmod 600 /home/.ssh/key
+  fi
+
 fi
 
-# Check the current file permissions of /home/.ssh/key.
-# If the permissions are not set to 600 (owner read/write only), update them to 600
-# to ensure SSH private key security (required by OpenSSH).
-if [ "$(stat -c '%a' /home/.ssh/key)" != "600" ]; then
-chmod 600 /home/.ssh/key
-fi
