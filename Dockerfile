@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y \
     openssh-client \
     python3 \
     jq \
+    procps \
     $EXTRA_APT_PACKAGES \
     && rm -rf /var/lib/apt/lists/*
 
