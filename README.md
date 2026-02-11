@@ -230,7 +230,9 @@ Redeploy your Lagoon project with the new environment variables. OpenClaw will a
 
 **5. Test Your Bot**
 
-Once deployed, you can send it a direct message. As with the WebUI you need to approve the pairing via the lagoon ssh connection.
+Once deployed, you can send it a direct message. Using the WebUI, you can ask your bot to confirm Slack is ready to roll.
+
+Heads up, as with the WebUI you will need to approve the pairing. Once you have confirmed the Slack integration is running using the WebUI chat, your can send a DM on Slack, and you'll get an authorization code and instructions to run in the terminal using the lagoon ssh connection as before.
 
 If you want to use the Bot in channel, you need to add it to the chanel and enable the chanel via telling it to enable it through a direct message. See the official [official OpenClaw Slack documentation](https://docs.openclaw.ai/channels/slack) for more information.
 
